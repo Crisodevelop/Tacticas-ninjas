@@ -9,7 +9,6 @@
     :root{
       --bg1:#0b1220;
       --bg2:#151b2d;
-      --card:#0f172a;
       --text:#e5e7eb;
       --muted:#9ca3af;
       --accent:#ff4d6d;
@@ -20,24 +19,39 @@
     }
 
     *{ box-sizing:border-box; }
+
+    html, body { height: 100%; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
-      min-height:100vh;
+
+      /* ✅ scroll en móvil */
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+
+      /* ✅ mejor con barra del navegador móvil */
+      min-height: 100vh;
+      min-height: 100svh;
+
       display:grid;
-      place-items:center;
+      place-items: start center;
+
+      padding: clamp(14px, 3vw, 40px) clamp(12px, 3vw, 20px);
+      padding-bottom: 56px;
+
       background:
         radial-gradient(900px 600px at 20% 10%, rgba(255,77,109,.18), transparent 60%),
         radial-gradient(900px 600px at 80% 70%, rgba(34,197,94,.14), transparent 60%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow:hidden;
     }
 
     .wrap{
-      width:min(920px, 92vw);
+      width:min(980px, 100%);
       display:grid;
-      gap:16px;
+      gap:14px;
     }
 
     .card{
@@ -45,17 +59,18 @@
       border:1px solid rgba(255,255,255,.10);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:22px;
+      padding: clamp(14px, 3vw, 22px);
       position:relative;
-      overflow:hidden;
+      overflow:hidden; /* OK aquí, no afecta el scroll global */
     }
 
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
+      gap:10px;
+      margin-bottom:12px;
+      flex-wrap:wrap;
     }
 
     .badge{
@@ -79,7 +94,7 @@
 
     h1{
       margin:0;
-      font-size: clamp(22px, 3vw, 34px);
+      font-size: clamp(20px, 3.5vw, 34px);
       line-height:1.12;
       letter-spacing:-0.02em;
     }
@@ -88,16 +103,17 @@
       margin:8px 0 0;
       color:var(--muted);
       line-height:1.5;
+      font-size: clamp(13px, 1.35vw, 16px);
     }
 
     .grid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
-      gap:16px;
+      gap:14px;
       align-items:stretch;
     }
 
-    @media (max-width: 860px){
+    @media (max-width: 900px){
       .grid{ grid-template-columns: 1fr; }
     }
 
@@ -105,20 +121,20 @@
       background: rgba(15,23,42,.55);
       border:1px solid rgba(255,255,255,.10);
       border-radius:18px;
-      padding:18px;
+      padding: clamp(14px, 3vw, 18px);
       position:relative;
       overflow:hidden;
-      min-height:240px;
+      min-height: unset;
     }
 
     .question{
       display:grid;
-      gap:14px;
+      gap:12px;
       align-content:start;
     }
 
     .big-emoji{
-      font-size:52px;
+      font-size: clamp(36px, 8vw, 56px);
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
 
@@ -126,7 +142,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top:8px;
+      margin-top:6px;
     }
 
     button{
@@ -141,27 +157,24 @@
       border:1px solid rgba(255,255,255,.14);
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
+      min-height:44px;
     }
     button:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); }
     button:active{ transform: translateY(0px) scale(.99); }
 
-    .btn-warn{
-      background: rgba(249,115,22,.18);
-      border-color: rgba(249,115,22,.30);
-    }
+    .btn-warn{ background: rgba(249,115,22,.18); border-color: rgba(249,115,22,.30); }
     .btn-warn:hover{ background: rgba(249,115,22,.24); }
 
-    .btn-accent{
-      background: rgba(255,77,109,.22);
-      border-color: rgba(255,77,109,.34);
-    }
+    .btn-accent{ background: rgba(255,77,109,.22); border-color: rgba(255,77,109,.34); }
     .btn-accent:hover{ background: rgba(255,77,109,.28); }
 
-    .btn-ok{
-      background: rgba(34,197,94,.18);
-      border-color: rgba(34,197,94,.30);
-    }
+    .btn-ok{ background: rgba(34,197,94,.18); border-color: rgba(34,197,94,.30); }
     .btn-ok:hover{ background: rgba(34,197,94,.24); }
+
+    @media (max-width: 520px){
+      .btns{ flex-direction:column; }
+      .btns button{ width:100%; }
+    }
 
     .meme{
       display:grid;
@@ -175,26 +188,25 @@
       background: rgba(0,0,0,.22);
       border:1px dashed rgba(255,255,255,.18);
       border-radius:16px;
-      min-height:170px;
+      min-height: unset;
       padding:14px;
       position:relative;
       overflow:hidden;
     }
 
-    /* “meme” estilo tarjeta */
     .meme-caption{
       font-weight:800;
       letter-spacing:.02em;
       text-transform:uppercase;
       text-align:center;
-      font-size:14px;
+      font-size: clamp(12px, 2.8vw, 14px);
       color: rgba(229,231,235,.92);
       text-shadow: 0 2px 10px rgba(0,0,0,.45);
       margin-top:8px;
     }
 
     .meme-figure{
-      width:min(320px, 90%);
+      width: min(520px, 100%);
       aspect-ratio: 16/9;
       border-radius:14px;
       background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
@@ -205,9 +217,10 @@
       overflow:hidden;
     }
 
-    /* carita arrepentida “meme” */
     .face{
-      width:120px; height:120px; border-radius:999px;
+      width: clamp(90px, 22vw, 120px);
+      height: clamp(90px, 22vw, 120px);
+      border-radius:999px;
       background: rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.18);
       display:grid;
@@ -223,34 +236,38 @@
     }
 
     .eyes{
-      display:flex; gap:18px;
-      position:absolute; top:44px;
+      display:flex; gap: clamp(12px, 3vw, 18px);
+      position:absolute; top: 38%;
     }
     .eye{
-      width:14px; height:14px; border-radius:999px;
+      width: clamp(10px, 2.4vw, 14px);
+      height: clamp(10px, 2.4vw, 14px);
+      border-radius:999px;
       background: rgba(229,231,235,.95);
       box-shadow: 0 0 0 6px rgba(255,255,255,.06);
     }
     .mouth{
-      position:absolute; top:72px;
-      width:46px; height:22px;
+      position:absolute; top: 62%;
+      width: clamp(34px, 8vw, 46px);
+      height: clamp(16px, 4vw, 22px);
       border:3px solid rgba(229,231,235,.90);
       border-top:none;
       border-left:none;
       border-right:none;
       border-radius:0 0 999px 999px;
       opacity:.95;
-      transform: rotate(180deg); /* carita triste */
+      transform: rotate(180deg);
     }
 
     .tear{
       position:absolute;
-      left:56px; top:58px;
-      width:10px; height:14px;
+      left: 47%;
+      top: 48%;
+      width: clamp(8px, 2vw, 10px);
+      height: clamp(12px, 3vw, 14px);
       background: rgba(147,197,253,.85);
-      border-radius: 999px 999px 999px 999px;
+      border-radius: 999px;
       transform: rotate(18deg);
-      filter: blur(.1px);
       animation: drip 1.6s ease-in-out infinite;
     }
     @keyframes drip{
@@ -258,20 +275,16 @@
       50%{ transform: translateY(10px) rotate(18deg); opacity:.55; }
     }
 
-    .state{
-      display:none;
-    }
-    .state.active{
-      display:block;
-    }
+    .state{ display:none; }
+    .state.active{ display:block; }
 
     .hint{
-      font-size:12px;
+      font-size: clamp(11px, 2.7vw, 12px);
       color: rgba(229,231,235,.72);
       margin-top:6px;
     }
 
-    /* lluvia de “TE AMO” */
+    /* Lluvia */
     .love-layer{
       position:fixed;
       inset:0;
@@ -295,6 +308,7 @@
       animation: fall linear forwards;
       white-space:nowrap;
       will-change: transform, opacity;
+      font-size: clamp(12px, 3vw, 16px);
     }
 
     @keyframes fall{
@@ -306,7 +320,7 @@
     .footer{
       display:flex;
       justify-content:space-between;
-      gap:12px;
+      gap:10px;
       align-items:center;
       flex-wrap:wrap;
       margin-top:10px;
@@ -318,6 +332,11 @@
       color: rgba(229,231,235,.85);
       text-decoration:none;
       border-bottom: 1px dashed rgba(229,231,235,.35);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .face, .tear, .love{ animation:none !important; }
+      button{ transition:none; }
     }
   </style>
 </head>
@@ -333,13 +352,13 @@
       </div>
 
       <div class="grid">
-        <!-- PANEL IZQUIERDO: PREGUNTA -->
+        <!-- PANEL IZQUIERDO -->
         <div class="panel">
           <div id="stateQuestion" class="state active">
             <div class="question">
               <div class="big-emoji">😠</div>
               <h1>¿Estás enojada conmigo?</h1>
-              <p>Responde con sinceridad… 🙃</p>
+              <p>Responde con sinceridad… prometo no llorar (mucho). 🙃</p>
 
               <div class="btns">
                 <button class="btn-warn" id="btnYes">Sí, estoy enojada 😤</button>
@@ -367,7 +386,7 @@
           </div>
         </div>
 
-        <!-- PANEL DERECHO: MEME ARREPENTIDO -->
+        <!-- PANEL DERECHO -->
         <div class="panel">
           <div class="meme">
             <h1 style="font-size:22px;margin:0;">Modo arrepentido</h1>
@@ -375,7 +394,7 @@
 
             <div class="meme-box">
               <div class="meme-figure" id="memeFigure" style="opacity:.55;">
-                <div class="face">
+                <div class="face" aria-label="carita arrepentida">
                   <div class="eyes">
                     <div class="eye"></div>
                     <div class="eye"></div>
@@ -387,14 +406,14 @@
               <div class="meme-caption" id="memeCaption">“Yo después de hacerte enojar…”</div>
             </div>
 
-            <p class="hint">Puedes cambiar este “meme” por una imagen real si quieres (reemplazando el contenido del recuadro).</p>
+            <p class="hint">Pensando en ti.</p>
           </div>
         </div>
       </div>
 
       <div class="footer">
-        <span>Hecho con: HTML + CSS3 + JS</span>
-        <span>🫶 <a class="fake" href="#" onclick="return false;">Prometo portarme bien</a></span>
+        <span>Hecho con amor mi vida</span>
+        <span>🫶 <a class="fake" href="https://www.youtube.com/@crisodevelop" target="_blank">Prometo portarme bien</a></span>
       </div>
     </section>
   </main>
@@ -438,7 +457,6 @@
         afterText.textContent  = "Déjame compensarlo con cariño nivel spam (del bueno).";
         memeCaption.textContent = "“Yo intentando arreglarlo con ternura…”";
       }else{
-        // No angry
         moodEmoji.textContent = "😇";
         afterTitle.textContent = "¡Uff! Menos mal 😮‍💨";
         afterText.textContent  = "Igual te voy a decir algo: te amo (pero sin drama).";
@@ -453,6 +471,9 @@
       stateQuestion.classList.add("active");
       memeFigure.style.opacity = ".55";
       memeCaption.textContent = "“Yo después de hacerte enojar…”";
+      afterTitle.textContent = "Ok… me lo merezco.";
+      afterText.textContent  = "Procedo a poner mi cara de “yo no fui” y pedir perdón con estilo meme.";
+      moodEmoji.textContent = "🥺";
     }
 
     function spawnLove(){
@@ -460,8 +481,8 @@
       el.className = "love";
       el.textContent = (Math.random() > 0.5 ? "TE AMO 💖" : "TE AMO 🫶");
 
-      const left = Math.random() * 100; // %
-      const duration = 2.5 + Math.random() * 2.8; // seconds
+      const left = Math.random() * 100;
+      const duration = 2.5 + Math.random() * 2.8;
       const scale = 0.85 + Math.random() * 0.9;
 
       el.style.left = left + "vw";
@@ -469,24 +490,19 @@
       el.style.transform = `scale(${scale})`;
 
       loveLayer.appendChild(el);
-
-      // limpiar
       setTimeout(() => el.remove(), (duration + 0.2) * 1000);
     }
 
     function startLove(){
       if(loveInterval) return;
 
-      // burst inicial
       for(let i=0;i<12;i++) setTimeout(spawnLove, i*70);
 
       loveInterval = setInterval(() => {
-        // cantidad por tick
         const n = 2 + Math.floor(Math.random()*3);
         for(let i=0;i<n;i++) spawnLove();
       }, 180);
 
-      // detener luego de un rato (puedes quitar esto si quieres infinito)
       setTimeout(stopLove, 6500);
     }
 
