@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>¿Estás enojada? 😠👉🥺</title>
+
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#151b2d;
+      --card:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#ff4d6d;
+      --ok:#22c55e;
+      --warn:#f97316;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(255,77,109,.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 70%, rgba(34,197,94,.14), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    .wrap{
+      width:min(920px, 92vw);
+      display:grid;
+      gap:16px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .badge{
+      font-size:12px;
+      color:rgba(229,231,235,.9);
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      padding:8px 12px;
+      border-radius:999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      user-select:none;
+    }
+
+    .badge .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--warn);
+      box-shadow: 0 0 14px rgba(249,115,22,.75);
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height:1.12;
+      letter-spacing:-0.02em;
+    }
+
+    p{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      background: rgba(15,23,42,.55);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height:240px;
+    }
+
+    .question{
+      display:grid;
+      gap:14px;
+      align-content:start;
+    }
+
+    .big-emoji{
+      font-size:52px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    .btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:700;
+      color:var(--text);
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    button:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); }
+    button:active{ transform: translateY(0px) scale(.99); }
+
+    .btn-warn{
+      background: rgba(249,115,22,.18);
+      border-color: rgba(249,115,22,.30);
+    }
+    .btn-warn:hover{ background: rgba(249,115,22,.24); }
+
+    .btn-accent{
+      background: rgba(255,77,109,.22);
+      border-color: rgba(255,77,109,.34);
+    }
+    .btn-accent:hover{ background: rgba(255,77,109,.28); }
+
+    .btn-ok{
+      background: rgba(34,197,94,.18);
+      border-color: rgba(34,197,94,.30);
+    }
+    .btn-ok:hover{ background: rgba(34,197,94,.24); }
+
+    .meme{
+      display:grid;
+      gap:10px;
+      align-content:start;
+    }
+
+    .meme-box{
+      display:grid;
+      place-items:center;
+      background: rgba(0,0,0,.22);
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:16px;
+      min-height:170px;
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* “meme” estilo tarjeta */
+    .meme-caption{
+      font-weight:800;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      text-align:center;
+      font-size:14px;
+      color: rgba(229,231,235,.92);
+      text-shadow: 0 2px 10px rgba(0,0,0,.45);
+      margin-top:8px;
+    }
+
+    .meme-figure{
+      width:min(320px, 90%);
+      aspect-ratio: 16/9;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.12);
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* carita arrepentida “meme” */
+    .face{
+      width:120px; height:120px; border-radius:999px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      display:grid;
+      place-items:center;
+      position:relative;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      transform: rotate(-3deg);
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob{
+      0%,100%{ transform: translateY(0) rotate(-3deg); }
+      50%{ transform: translateY(-6px) rotate(-1deg); }
+    }
+
+    .eyes{
+      display:flex; gap:18px;
+      position:absolute; top:44px;
+    }
+    .eye{
+      width:14px; height:14px; border-radius:999px;
+      background: rgba(229,231,235,.95);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.06);
+    }
+    .mouth{
+      position:absolute; top:72px;
+      width:46px; height:22px;
+      border:3px solid rgba(229,231,235,.90);
+      border-top:none;
+      border-left:none;
+      border-right:none;
+      border-radius:0 0 999px 999px;
+      opacity:.95;
+      transform: rotate(180deg); /* carita triste */
+    }
+
+    .tear{
+      position:absolute;
+      left:56px; top:58px;
+      width:10px; height:14px;
+      background: rgba(147,197,253,.85);
+      border-radius: 999px 999px 999px 999px;
+      transform: rotate(18deg);
+      filter: blur(.1px);
+      animation: drip 1.6s ease-in-out infinite;
+    }
+    @keyframes drip{
+      0%,100%{ transform: translateY(0) rotate(18deg); opacity:.85; }
+      50%{ transform: translateY(10px) rotate(18deg); opacity:.55; }
+    }
+
+    .state{
+      display:none;
+    }
+    .state.active{
+      display:block;
+    }
+
+    .hint{
+      font-size:12px;
+      color: rgba(229,231,235,.72);
+      margin-top:6px;
+    }
+
+    /* lluvia de “TE AMO” */
+    .love-layer{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:10;
+    }
+
+    .love{
+      position:absolute;
+      top:-40px;
+      font-weight:900;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(255,77,109,.18);
+      border:1px solid rgba(255,77,109,.35);
+      box-shadow: 0 16px 45px rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      animation: fall linear forwards;
+      white-space:nowrap;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fall{
+      0%   { transform: translateY(-60px) rotate(0deg); opacity:0; }
+      10%  { opacity:1; }
+      100% { transform: translateY(calc(100vh + 120px)) rotate(18deg); opacity:0.85; }
+    }
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:10px;
+      color: rgba(229,231,235,.65);
+      font-size:12px;
+    }
+
+    a.fake{
+      color: rgba(229,231,235,.85);
+      text-decoration:none;
+      border-bottom: 1px dashed rgba(229,231,235,.35);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="love-layer" id="loveLayer" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="topbar">
+        <span class="badge"><span class="dot"></span> Modo: dramático (pero con amor)</span>
+        <span class="badge">😠 ➜ 🥺 ➜ 💖</span>
+      </div>
+
+      <div class="grid">
+        <!-- PANEL IZQUIERDO: PREGUNTA -->
+        <div class="panel">
+          <div id="stateQuestion" class="state active">
+            <div class="question">
+              <div class="big-emoji">😠</div>
+              <h1>¿Estás enojada conmigo?</h1>
+              <p>Responde con sinceridad… 🙃</p>
+
+              <div class="btns">
+                <button class="btn-warn" id="btnYes">Sí, estoy enojada 😤</button>
+                <button class="btn-accent" id="btnMaybe">Un poquito… 😒</button>
+                <button class="btn-ok" id="btnNo">No 😇</button>
+              </div>
+
+              <div class="hint">Tip: el botón “arrepentido” aparece si dices que sí (o “un poquito”).</div>
+            </div>
+          </div>
+
+          <div id="stateAfter" class="state">
+            <div class="question">
+              <div class="big-emoji" id="moodEmoji">🥺</div>
+              <h1 id="afterTitle">Ok… me lo merezco.</h1>
+              <p id="afterText">Procedo a poner mi cara de “yo no fui” y pedir perdón con estilo meme.</p>
+
+              <div class="btns">
+                <button class="btn-accent" id="btnLove">Click aquí para arreglarlo 😭💖</button>
+                <button id="btnReset">Reiniciar</button>
+              </div>
+
+              <div class="hint">Cuando le des click, caerán muchos “TE AMO”.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL DERECHO: MEME ARREPENTIDO -->
+        <div class="panel">
+          <div class="meme">
+            <h1 style="font-size:22px;margin:0;">Modo arrepentido</h1>
+            <p style="margin-top:6px;">(Esto se activa cuando estás enojada 😅)</p>
+
+            <div class="meme-box">
+              <div class="meme-figure" id="memeFigure" style="opacity:.55;">
+                <div class="face">
+                  <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                  </div>
+                  <div class="mouth"></div>
+                  <div class="tear"></div>
+                </div>
+              </div>
+              <div class="meme-caption" id="memeCaption">“Yo después de hacerte enojar…”</div>
+            </div>
+
+            <p class="hint">Puedes cambiar este “meme” por una imagen real si quieres (reemplazando el contenido del recuadro).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Hecho con: HTML + CSS3 + JS</span>
+        <span>🫶 <a class="fake" href="#" onclick="return false;">Prometo portarme bien</a></span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const stateQuestion = document.getElementById("stateQuestion");
+    const stateAfter    = document.getElementById("stateAfter");
+
+    const btnYes   = document.getElementById("btnYes");
+    const btnMaybe = document.getElementById("btnMaybe");
+    const btnNo    = document.getElementById("btnNo");
+
+    const btnLove  = document.getElementById("btnLove");
+    const btnReset = document.getElementById("btnReset");
+
+    const moodEmoji  = document.getElementById("moodEmoji");
+    const afterTitle = document.getElementById("afterTitle");
+    const afterText  = document.getElementById("afterText");
+
+    const memeFigure  = document.getElementById("memeFigure");
+    const memeCaption = document.getElementById("memeCaption");
+
+    const loveLayer = document.getElementById("loveLayer");
+
+    let loveInterval = null;
+
+    function showAfter(mode){
+      stateQuestion.classList.remove("active");
+      stateAfter.classList.add("active");
+
+      memeFigure.style.opacity = "1";
+
+      if(mode === "yes"){
+        moodEmoji.textContent = "🥺";
+        afterTitle.textContent = "Ok… estoy arrepentido.";
+        afterText.textContent  = "No era mi intención. Dame un chance: tengo una sorpresa (muchos TE AMO).";
+        memeCaption.textContent = "“Yo cuando me doy cuenta que metí la pata…”";
+      }else if(mode === "maybe"){
+        moodEmoji.textContent = "😅";
+        afterTitle.textContent = "Un poquito… cuenta como enojada 😬";
+        afterText.textContent  = "Déjame compensarlo con cariño nivel spam (del bueno).";
+        memeCaption.textContent = "“Yo intentando arreglarlo con ternura…”";
+      }else{
+        // No angry
+        moodEmoji.textContent = "😇";
+        afterTitle.textContent = "¡Uff! Menos mal 😮‍💨";
+        afterText.textContent  = "Igual te voy a decir algo: te amo (pero sin drama).";
+        memeCaption.textContent = "“Yo feliz porque no estás enojada…”";
+        memeFigure.style.opacity = ".75";
+      }
+    }
+
+    function resetAll(){
+      stopLove();
+      stateAfter.classList.remove("active");
+      stateQuestion.classList.add("active");
+      memeFigure.style.opacity = ".55";
+      memeCaption.textContent = "“Yo después de hacerte enojar…”";
+    }
+
+    function spawnLove(){
+      const el = document.createElement("div");
+      el.className = "love";
+      el.textContent = (Math.random() > 0.5 ? "TE AMO 💖" : "TE AMO 🫶");
+
+      const left = Math.random() * 100; // %
+      const duration = 2.5 + Math.random() * 2.8; // seconds
+      const scale = 0.85 + Math.random() * 0.9;
+
+      el.style.left = left + "vw";
+      el.style.animationDuration = duration + "s";
+      el.style.transform = `scale(${scale})`;
+
+      loveLayer.appendChild(el);
+
+      // limpiar
+      setTimeout(() => el.remove(), (duration + 0.2) * 1000);
+    }
+
+    function startLove(){
+      if(loveInterval) return;
+
+      // burst inicial
+      for(let i=0;i<12;i++) setTimeout(spawnLove, i*70);
+
+      loveInterval = setInterval(() => {
+        // cantidad por tick
+        const n = 2 + Math.floor(Math.random()*3);
+        for(let i=0;i<n;i++) spawnLove();
+      }, 180);
+
+      // detener luego de un rato (puedes quitar esto si quieres infinito)
+      setTimeout(stopLove, 6500);
+    }
+
+    function stopLove(){
+      if(loveInterval){
+        clearInterval(loveInterval);
+        loveInterval = null;
+      }
+    }
+
+    btnYes.addEventListener("click", () => showAfter("yes"));
+    btnMaybe.addEventListener("click", () => showAfter("maybe"));
+    btnNo.addEventListener("click", () => showAfter("no"));
+
+    btnLove.addEventListener("click", () => {
+      startLove();
+      afterTitle.textContent = "TE AMO x1000 😭💖";
+      afterText.textContent  = "Ok, ya… pero en serio: te amo muchísimo. (Mira arriba 👆)";
+    });
+
+    btnReset.addEventListener("click", resetAll);
+  </script>
+</body>
+</html>
