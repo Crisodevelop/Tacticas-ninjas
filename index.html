@@ -19,7 +19,6 @@
     }
 
     *{ box-sizing:border-box; }
-
     html, body { height: 100%; }
 
     body{
@@ -27,16 +26,17 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
 
-      /* ✅ scroll en móvil */
+      /* ✅ móvil: permitir scroll */
       overflow-x: hidden;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
 
-      /* ✅ mejor con barra del navegador móvil */
       min-height: 100vh;
       min-height: 100svh;
 
       display:grid;
+
+      /* ✅ por defecto: móvil arriba para que se sienta natural al scrollear */
       place-items: start center;
 
       padding: clamp(14px, 3vw, 40px) clamp(12px, 3vw, 20px);
@@ -46,6 +46,11 @@
         radial-gradient(900px 600px at 20% 10%, rgba(255,77,109,.18), transparent 60%),
         radial-gradient(900px 600px at 80% 70%, rgba(34,197,94,.14), transparent 60%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
+    }
+
+    /* ✅ desktop: centra el card en el medio de la pantalla */
+    @media (min-width: 900px){
+      body{ place-items: center; }
     }
 
     .wrap{
@@ -61,7 +66,7 @@
       box-shadow:var(--shadow);
       padding: clamp(14px, 3vw, 22px);
       position:relative;
-      overflow:hidden; /* OK aquí, no afecta el scroll global */
+      overflow:hidden;
     }
 
     .topbar{
@@ -358,7 +363,7 @@
             <div class="question">
               <div class="big-emoji">😠</div>
               <h1>¿Estás enojada conmigo?</h1>
-              <p>Responde con sinceridad… prometo no llorar (mucho). 🙃</p>
+              <p>Responde con sinceridad... 🙃</p>
 
               <div class="btns">
                 <button class="btn-warn" id="btnYes">Sí, estoy enojada 😤</button>
@@ -406,14 +411,14 @@
               <div class="meme-caption" id="memeCaption">“Yo después de hacerte enojar…”</div>
             </div>
 
-            <p class="hint">Pensando en ti.</p>
+            <p class="hint">Pienso en ti.</p>
           </div>
         </div>
       </div>
 
       <div class="footer">
-        <span>Hecho con amor mi vida</span>
-        <span>🫶 <a class="fake" href="https://www.youtube.com/@crisodevelop" target="_blank">Prometo portarme bien</a></span>
+        <span>Hecho con amor para el amor de mi vida </span>
+        <span>🫶 <a class="fake" href="https://youtu.be/PWB0uCoBo6w" target="_blank">Prometo portarme bien</a></span>
       </div>
     </section>
   </main>
