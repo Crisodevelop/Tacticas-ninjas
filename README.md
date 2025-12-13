@@ -1,7 +1,6 @@
 # 💖 “¿Estás enojada conmigo?”
 
-
-[![Ver video]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtu.be/PWB0uCoBo6w))
+🎥 **Ver video:** https://youtu.be/PWB0uCoBo6w
 
 Mini página en **HTML + CSS + JS** con modo “enojo ➜ arrepentido” y lluvia de **“TE AMO”** al presionar un botón.  
 Optimizada para **móvil (responsive + scroll OK)**.
@@ -9,8 +8,7 @@ Optimizada para **móvil (responsive + scroll OK)**.
 ---
 
 ## ✅ Demo / Preview
-> Cuando esté desplegado en Vercel, pega aquí tu enlace:
-- **Live:** https://TU-PROYECTO.vercel.app
+- **Live:** https://tacticas-ninjas.vercel.app
 
 ---
 
@@ -23,7 +21,6 @@ Optimizada para **móvil (responsive + scroll OK)**.
 
 ## 📁 Estructura recomendada
 Asegúrate de tener **`index.html`** en la raíz del proyecto:
-
 
 > Importante: Vercel carga `/` desde `index.html`.  
 > Si tu archivo se llama `love.htm`, renómbralo a `index.html`.
@@ -40,7 +37,6 @@ Opción recomendada (servidor local):
 ---
 
 # 🚀 Subir a GitHub usando GitHub Desktop
-
 ## 1) Crear el repositorio en GitHub
 1. Entra a GitHub (web)
 2. **New repository**
@@ -62,7 +58,6 @@ Opción recomendada (servidor local):
 ---
 
 # 🌐 Deploy en Vercel (HTML plano)
-
 ## 1) Importar el repo
 1. Entra a **Vercel**
 2. **Add New ➜ Project**
@@ -76,52 +71,10 @@ En **Framework Preset** selecciona:
 Luego verifica:
 - **Build Command:** *(vacío / none)*
 - **Output Directory:** *(vacío)* o `.`  
-  - ⚠️ Si tu proyecto tiene una carpeta `public/`, Vercel puede intentar servir desde `public`.  
-    En ese caso, mueve `index.html` a `public/index.html` **o** fuerza Output Directory = `.`
 
 5. Clic en **Deploy**
-
-✅ Tu web debe quedar en algo como:
-- `https://love-page-xxxx.vercel.app`
-
----
-
-## 🧯 Errores comunes (y solución rápida)
-
-### ❌ No carga en Vercel / sale 404
-- Falta `index.html` en la raíz.
-- Solución: **renombra tu archivo a `index.html`** y redeploy.
-
-### ❌ CSS/JS no cargan en Vercel
-- Revisa rutas y mayúsculas/minúsculas (Linux es estricto).
-- Usa rutas así:
-  - `./style.css`
-  - `./app.js`
-
-### ❌ En móvil no deja hacer scroll
-- No uses `overflow: hidden` en `body`.
-- (Ya está corregido en la versión actual.)
-
----
-
-## 🔁 Actualizar cambios
-1. Edita tu `index.html`
-2. GitHub Desktop:
-   - Summary: `Update UI` (ejemplo)
-   - **Commit to main**
-   - **Push origin**
-3. Vercel detecta el push y redeploy automáticamente ✅
 
 ---
 
 # 🎥 Video (debajo)
-Pega aquí tu video:
-
-## Opción A: Link directo
-👉 **Video:** TU_LINK_AQUI
-
-## Opción B: YouTube con miniatura (recomendado)
-Reemplaza `VIDEO_ID` por el ID de YouTube:
-
-
-
+👉 **Video:** https://youtu.be/PWB0uCoBo6w
